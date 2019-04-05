@@ -10,8 +10,15 @@ python:
 install:
   - pip install -r requirements_dev.txt
 script:
+<<<<<<< HEAD
     - pytest src/test_*.py --cov=handler
   - pycodestyle src/*py --ignore=E501
 after_success:
   - coveralls 
   #teste
+=======
+  - pytest src/test_*.py --cov=handler --cov-fail-under=100
+  - pycodestyle src/*py --ignore=E501
+after_success:
+  - coveralls
+>>>>>>> b82b989057de49518eaf8b4c0cc7c732bf4b7161
