@@ -19,6 +19,18 @@ after_success:
 =======
   - pytest src/test_*.py --cov=handler --cov-fail-under=100
   - pycodestyle src/*py --ignore=E501
+  - aws cloudformation validate-template --template-body file://cf.yaml
 after_success:
   - coveralls
+<<<<<<< HEAD
 >>>>>>> b82b989057de49518eaf8b4c0cc7c732bf4b7161
+=======
+before_deploy: aws cloudformation package --template-file cf.yaml --s3-bucket ${BUCKET_NAME} --output-template-file out.yaml
+deploy:
+  provider: script
+  script: aws cloudformation deploy --template-file out.yaml --stack-name devops-alphaville --capabilities CAPABILITY_IAM
+  skip_cleanup: true
+  on:
+    all_branches: true
+    python: "3.6"
+>>>>>>> 144166e675220f3dfd4258e651cec2c8c7e1fd3f
